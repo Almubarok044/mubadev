@@ -23,8 +23,8 @@ class CustomNavbar extends StatelessWidget {
       routeName = '/experience';
     } else if (title == 'Proyek') {
       routeName = '/work';
-    } else if (title == 'Kontak') {
-      routeName = '/contact';
+    } else if (title == 'Resume') {
+      routeName = '/';
     }
 
     Navigator.pushReplacementNamed(context, routeName);
@@ -45,105 +45,116 @@ class CustomNavbar extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          CursorHideRegion(
-            child: InkWell(
-              onTap: () => _onMenuTapped(context, 'Beranda'),
-              borderRadius: BorderRadius.circular(8),
-              child: Image.asset(
-                'assets/icon/mbv.png',
-                height: 44,
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
-          const SizedBox(width: 16),
-          // List Menu
-          _buildMenuItem(context, 'Beranda', Icons.home_rounded, 'navbar_home'),
-          _buildMenuItem(
-            context,
-            'Tentang',
-            Icons.person_outline_rounded,
-            'navbar_about',
-          ),
-          _buildMenuItem(
-            context,
-            'Keahlian',
-            Icons.bolt_rounded,
-            'navbar_skills',
-          ),
-          _buildMenuItem(
-            context,
-            'Proyek',
-            Icons.folder_open_rounded,
-            'navbar_projects',
-          ),
-          _buildMenuItem(
-            context,
-            'Pengalaman',
-            Icons.work_outline_rounded,
-            'navbar_experience',
-          ),
-          _buildMenuItem(
-            context,
-            'Kontak',
-            Icons.mail_outline_rounded,
-            'navbar_contact',
-          ),
-          const SizedBox(width: 12),
-          // Actions (Dark mode & Language)
-          CursorHideRegion(
-            child: IconButton(
-              onPressed: () {
-                ThemeManager.toggleTheme();
-              },
-              icon: Icon(
-                ThemeManager.themeNotifier.value == ThemeMode.dark
-                    ? Icons.light_mode
-                    : Icons.dark_mode,
-                color: AppColors.textSecondary(context),
-              ),
-            ),
-          ),
-          const SizedBox(width: 12),
-          CursorHideRegion(
-            child: InkWell(
-              onTap: () {
-                if (context.locale.languageCode == 'en') {
-                  context.setLocale(const Locale('id'));
-                } else {
-                  context.setLocale(const Locale('en'));
-                }
-              },
-              borderRadius: BorderRadius.circular(20),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 8.0,
-                  vertical: 8.0,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CursorHideRegion(
+              child: InkWell(
+                onTap: () => _onMenuTapped(context, 'Beranda'),
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  Theme.of(context).brightness == Brightness.dark
+                      ? 'assets/icon/mbvlight.png'
+                      : 'assets/icon/mbv.png',
+                  height: 44,
+                  fit: BoxFit.contain,
                 ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.language,
-                      color: AppColors.textSecondary(context),
-                      size: 20,
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      tr('navbar_lang'),
-                      style: TextStyle(
+              ),
+            ),
+            const SizedBox(width: 16),
+            // List Menu
+            _buildMenuItem(
+              context,
+              'Beranda',
+              Icons.home_rounded,
+              'navbar_home',
+            ),
+            _buildMenuItem(
+              context,
+              'Tentang',
+              Icons.person_outline_rounded,
+              'navbar_about',
+            ),
+            _buildMenuItem(
+              context,
+              'Keahlian',
+              Icons.bolt_rounded,
+              'navbar_skills',
+            ),
+            _buildMenuItem(
+              context,
+              'Proyek',
+              Icons.folder_open_rounded,
+              'navbar_projects',
+            ),
+            _buildMenuItem(
+              context,
+              'Pengalaman',
+              Icons.work_outline_rounded,
+              'navbar_experience',
+            ),
+            _buildMenuItem(
+              context,
+              'Resume',
+              Icons.insert_drive_file_outlined,
+              'navbar_contact',
+              isBoxed: true,
+            ),
+            const SizedBox(width: 12),
+            // Actions (Dark mode & Language)
+            CursorHideRegion(
+              child: IconButton(
+                onPressed: () {
+                  ThemeManager.toggleTheme();
+                },
+                icon: Icon(
+                  ThemeManager.themeNotifier.value == ThemeMode.dark
+                      ? Icons.light_mode
+                      : Icons.dark_mode,
+                  color: AppColors.textSecondary(context),
+                ),
+              ),
+            ),
+            const SizedBox(width: 12),
+            CursorHideRegion(
+              child: InkWell(
+                onTap: () {
+                  if (context.locale.languageCode == 'en') {
+                    context.setLocale(const Locale('id'));
+                  } else {
+                    context.setLocale(const Locale('en'));
+                  }
+                },
+                borderRadius: BorderRadius.circular(20),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8.0,
+                    vertical: 8.0,
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.language,
                         color: AppColors.textSecondary(context),
-                        fontWeight: FontWeight.bold,
+                        size: 20,
                       ),
-                    ),
-                  ],
+                      const SizedBox(width: 6),
+                      Text(
+                        tr('navbar_lang'),
+                        style: TextStyle(
+                          color: AppColors.textSecondary(context),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -152,42 +163,76 @@ class CustomNavbar extends StatelessWidget {
     BuildContext context,
     String title,
     IconData icon,
-    String translationKey,
-  ) {
+    String translationKey, {
+    bool isBoxed = false,
+  }) {
     bool isActive = activeMenu == title;
+
     return CursorHideRegion(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4.0),
-        child: InkWell(
-          onTap: () => _onMenuTapped(context, title),
-          borderRadius: BorderRadius.circular(24),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            decoration: BoxDecoration(
-              color: isActive ? AppColors.primary : Colors.transparent,
-              borderRadius: BorderRadius.circular(24),
-            ),
-            child: Row(
-              children: [
-                Icon(
-                  icon,
-                  size: 18,
-                  color: isActive ? Colors.white : Colors.grey[600],
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  tr(translationKey),
-                  style: TextStyle(
-                    color: isActive ? Colors.white : Colors.grey[600],
-                    fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
-                    fontSize: 14,
+      child: StatefulBuilder(
+        builder: (context, setState) {
+          bool isHovered = false;
+
+          return MouseRegion(
+            onEnter: (_) => setState(() => isHovered = true),
+            onExit: (_) => setState(() => isHovered = false),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              child: InkWell(
+                onTap: () => _onMenuTapped(context, title),
+                borderRadius: BorderRadius.circular(isBoxed ? 12 : 24),
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isBoxed ? 18 : 16,
+                    vertical: isBoxed ? 10 : 10,
+                  ),
+                  decoration: BoxDecoration(
+                    color: isActive || isHovered
+                        ? AppColors.primary
+                        : (isBoxed
+                              ? AppColors.surface(context)
+                              : Colors.transparent),
+                    borderRadius: BorderRadius.circular(isBoxed ? 12 : 24),
+                    border: isBoxed
+                        ? Border.all(
+                            color: isActive || isHovered
+                                ? AppColors.primary
+                                : AppColors.divider(context),
+                            width: 1.2,
+                          )
+                        : null,
+                  ),
+                  child: Row(
+                    children: [
+                      if (!isBoxed)
+                        Icon(
+                          icon,
+                          size: 18,
+                          color: isActive || isHovered
+                              ? Colors.white
+                              : Colors.grey[600],
+                        ),
+                      if (!isBoxed) const SizedBox(width: 8),
+                      Text(
+                        isBoxed ? title : tr(translationKey),
+                        style: TextStyle(
+                          color: isActive || isHovered
+                              ? Colors.white
+                              : AppColors.textMain(context),
+                          fontWeight: isActive || isHovered
+                              ? FontWeight.bold
+                              : FontWeight.w500,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -212,8 +257,8 @@ class CustomBottomNavbar extends StatelessWidget {
       routeName = '/experience';
     } else if (title == 'Proyek') {
       routeName = '/work';
-    } else if (title == 'Kontak') {
-      routeName = '/contact';
+    } else if (title == 'Resume') {
+      routeName = '/';
     }
 
     Navigator.pushReplacementNamed(context, routeName);
@@ -224,6 +269,8 @@ class CustomBottomNavbar extends StatelessWidget {
     bool isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
+      width: 360,
+      height: 58,
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
       decoration: BoxDecoration(
         color: AppColors.surface(
@@ -242,7 +289,8 @@ class CustomBottomNavbar extends StatelessWidget {
         ],
       ),
       child: Row(
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
         children: [
           _buildBottomItem(
             context,
@@ -276,8 +324,8 @@ class CustomBottomNavbar extends StatelessWidget {
           ),
           _buildBottomItem(
             context,
-            'Kontak',
-            Icons.mail_outline_rounded,
+            'Resume',
+            Icons.insert_drive_file_outlined,
             'navbar_contact',
           ),
           Container(

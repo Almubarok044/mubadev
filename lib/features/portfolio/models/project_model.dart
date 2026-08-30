@@ -6,6 +6,7 @@ class ProjectModel {
   final String shortDescription;
   final String fullDescription;
   final String imageAsset;
+  final String demoUrl;
   final List<String> technologies;
   final List<String> features;
 
@@ -17,9 +18,18 @@ class ProjectModel {
     required this.shortDescription,
     required this.fullDescription,
     required this.imageAsset,
+    required this.demoUrl,
     required this.technologies,
     this.features = const [],
   });
+
+  bool get hasValidDemoUrl {
+    final uri = Uri.tryParse(demoUrl);
+    return uri != null &&
+        uri.hasScheme &&
+        (uri.scheme == 'http' || uri.scheme == 'https') &&
+        uri.host.isNotEmpty;
+  }
 
   static const List<ProjectModel> projects = [
     ProjectModel(
@@ -32,6 +42,7 @@ class ProjectModel {
       fullDescription:
           'Hidroponik App adalah solusi cerdas untuk memantau dan mengendalikan sistem budidaya hidroponik Anda. Dengan teknologi real-time, aplikasi ini memudahkan petani modern untuk mengoptimalkan hasil panen dengan kontrol presisi terhadap kondisi lingkungan tanaman.',
       imageAsset: 'assets/images/hidroponik.png',
+      demoUrl: 'https://skripsihidroponik-with-iot.web.app/',
       technologies: ['Flutter', 'IoT', 'Firebase', 'ESP32 / Sensors', 'Dart'],
       features: [
         'Monitoring kondisi air & nutrisi tanaman secara real-time',
@@ -49,6 +60,7 @@ class ProjectModel {
       fullDescription:
           'Aplikasi ini adalah proyek Flutter untuk mengelola transaksi penjualan secara digital. Aplikasi ini mencakup fitur utama seperti manajemen pelanggan, pengelolaan barang, pembuatan faktur, serta ekspor dokumen faktur ke format PDF.',
       imageAsset: 'assets/images/invoice.png',
+      demoUrl: 'https://penjualanberbasisfaktur.web.app/',
       technologies: [
         'Flutter',
         'Dart',
@@ -72,6 +84,7 @@ class ProjectModel {
       fullDescription:
           'Website ini merupakan landing page profil bisnis dan portofolio untuk Bengkel Las 999 yang berlokasi di Cibinong, Kabupaten Bogor. Website ini dirancang sebagai platform company profile satu halaman (Single Page Application/Landing Page) yang dioptimalkan untuk konversi prospek melalui fitur panggilan darurat, integrasi WhatsApp, dan penunjuk arah Google Maps.',
       imageAsset: 'assets/images/welding.png',
+      demoUrl: 'https://bengkellas999.netlify.app/',
       technologies: [
         'Flutter Web',
         'Responsive UI',
@@ -94,6 +107,7 @@ class ProjectModel {
       fullDescription:
           'Aplikasi katalog produk digital untuk brand Es Mambo Lasmi, dibuat dengan Flutter. Aplikasi ini menampilkan produk utama seperti Es Mambo, Es Jelly, dan berbagai pilihan kue kering serta hampers premium dengan desain modern yang responsif untuk desktop dan mobile.',
       imageAsset: 'assets/images/icemambo.png',
+      demoUrl: 'https://es-mambo-lasmi.web.app/',
       technologies: [
         'Flutter',
         'Responsive UI',

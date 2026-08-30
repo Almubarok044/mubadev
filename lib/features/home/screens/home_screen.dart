@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/widgets/interactive_cursor.dart';
 import '../../../core/widgets/page_layout.dart';
 import '../../../core/theme/app_colors.dart';
@@ -22,20 +24,34 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Hero Section
-                SizedBox(height: 60),
-                Text(
-                  tr('home_greeting'),
-                  style: TextStyle(
-                    fontSize: 16,
-                    letterSpacing: 2,
-                    color: AppColors.textSecondary(context),
+                const SizedBox(height: 60),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 8,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(999),
+                    border: Border.all(
+                      color: AppColors.primary.withValues(alpha: 0.18),
+                    ),
+                  ),
+                  child: Text(
+                    tr('home_greeting'),
+                    style: TextStyle(
+                      fontSize: 15,
+                      letterSpacing: 2,
+                      color: AppColors.textSecondary(context),
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
                 Text(
                   'Mohamad',
                   style: TextStyle(
-                    fontSize: 64,
+                    fontSize: 63,
                     fontWeight: FontWeight.bold,
                     color: AppColors.textMain(context),
                     height: 1.1,
@@ -43,19 +59,20 @@ class HomeScreen extends StatelessWidget {
                 ),
                 ShaderMask(
                   blendMode: BlendMode.srcIn,
-                  shaderCallback: (bounds) => AppColors.primaryGradient.createShader(
-                    Rect.fromLTWH(0, 0, bounds.width, bounds.height),
-                  ),
+                  shaderCallback: (bounds) =>
+                      AppColors.primaryGradient.createShader(
+                        Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+                      ),
                   child: Text(
                     'Almubarok',
                     style: TextStyle(
-                      fontSize: 64,
+                      fontSize: 63,
                       fontWeight: FontWeight.bold,
                       height: 1.1,
                     ),
                   ),
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
                 Text(
                   tr('home_desc'),
                   style: TextStyle(
@@ -64,31 +81,34 @@ class HomeScreen extends StatelessWidget {
                     height: 1.5,
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Wrap(
                   spacing: 16,
                   runSpacing: 16,
                   children: [
                     CursorHideRegion(
-                      child: Container(
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 250),
+                        curve: Curves.easeOutCubic,
                         decoration: BoxDecoration(
                           gradient: AppColors.primaryGradient,
                           borderRadius: BorderRadius.circular(30),
                           boxShadow: [
                             BoxShadow(
                               color: AppColors.primary.withValues(alpha: 0.3),
-                              blurRadius: 10,
-                              offset: const Offset(0, 4),
+                              blurRadius: 16,
+                              spreadRadius: 1,
+                              offset: const Offset(0, 6),
                             ),
                           ],
                         ),
                         child: ElevatedButton.icon(
                           onPressed: () =>
                               Navigator.pushReplacementNamed(context, '/work'),
-                          icon: Icon(Icons.folder_open),
+                          icon: const Icon(Icons.folder_open),
                           label: Text(
                             tr('home_view_projects'),
-                            style: TextStyle(fontWeight: FontWeight.bold),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
@@ -106,27 +126,54 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     CursorHideRegion(
-                      child: OutlinedButton.icon(
-                        onPressed: () =>
-                            Navigator.pushReplacementNamed(context, '/contact'),
-                        icon: Icon(Icons.mail_outline),
-                        label: Text(
-                          tr('home_contact_me'),
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        style: OutlinedButton.styleFrom(
-                          foregroundColor: AppColors.textMain(context),
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 28,
-                            vertical: 20,
-                          ),
-                          side: BorderSide(
-                            color: Theme.of(context).brightness == Brightness.dark 
-                                ? Colors.white30 
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 250),
+                        curve: Curves.easeOutCubic,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          border: Border.all(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white30
                                 : Colors.black12,
                           ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                          boxShadow: [
+                            BoxShadow(
+                              color: AppColors.primary.withValues(alpha: 0.08),
+                              blurRadius: 12,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                        ),
+                        child: OutlinedButton.icon(
+                          onPressed: () async {
+                            const phoneNumber = '6283818908892';
+                            final uri = Uri.parse(
+                              'https://wa.me/$phoneNumber?text=${Uri.encodeComponent('Halo, saya tertarik dengan profil Anda.')}',
+                            );
+
+                            if (await canLaunchUrl(uri)) {
+                              await launchUrl(
+                                uri,
+                                mode: LaunchMode.externalApplication,
+                              );
+                            }
+                          },
+                          icon: const FaIcon(FontAwesomeIcons.whatsapp),
+                          label: Text(
+                            tr('home_contact_me'),
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          style: OutlinedButton.styleFrom(
+                            foregroundColor: AppColors.textMain(context),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 28,
+                              vertical: 20,
+                            ),
+                            side: BorderSide.none,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
                           ),
                         ),
                       ),
@@ -179,10 +226,7 @@ class HomeScreen extends StatelessWidget {
 class HoverProjectCard extends StatefulWidget {
   final ProjectModel project;
 
-  const HoverProjectCard({
-    super.key,
-    required this.project,
-  });
+  const HoverProjectCard({super.key, required this.project});
 
   @override
   State<HoverProjectCard> createState() => _HoverProjectCardState();
@@ -219,7 +263,9 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
               border: Border.all(
                 color: _isHovered
                     ? AppColors.primary.withValues(alpha: 0.4)
-                    : (isDark ? Colors.white12 : Colors.black.withValues(alpha: 0.05)),
+                    : (isDark
+                          ? Colors.white12
+                          : Colors.black.withValues(alpha: 0.05)),
               ),
               boxShadow: [
                 BoxShadow(
@@ -302,4 +348,3 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
     );
   }
 }
-

@@ -42,6 +42,19 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.14.4
+  flutter_lints: ^6.0.0
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/mbvicon.png"
+
+  web:
+    generate: true
+    image_path: "assets/icon/mbvicon.png"
+    background_color: "#FFFFFF"
+    theme_color: "#FFFFFF"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -62,14 +75,17 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/icon/mbvicon.png
-    - assets/icon/mbvonly.png
     - assets/icon/mbv.png
+    - assets/icon/mbvicon.png
+    - assets/icon/mbvlight.png
     - assets/icon/mubarokdeveloper.png
+    - assets/icon/mubarokdeveloperlight.png
     - assets/images/hidroponik.png
     - assets/images/icemambo.png
     - assets/images/invoice.png
     - assets/images/welding.png
+    - assets/images/me.png
+    - assets/images/mirrorselfie.jpg
     - assets/translations/
 
   # An image asset can refer to one or more resolution-specific "variants", see

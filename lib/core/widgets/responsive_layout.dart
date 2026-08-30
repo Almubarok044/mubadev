@@ -12,28 +12,48 @@ class ResponsiveLayout extends StatelessWidget {
     required this.desktop,
   });
 
-  static bool isMobile(BuildContext context) =>
-      MediaQuery.of(context).size.width < 650;
+  // ============================================================
+  // BREAKPOINT
+  // ============================================================
 
-  static bool isTablet(BuildContext context) =>
-      MediaQuery.of(context).size.width >= 650 &&
-      MediaQuery.of(context).size.width < 1100;
+  static bool isMobile(BuildContext context) {
+    return MediaQuery.of(context).size.shortestSide < 650;
+  }
 
-  static bool isDesktop(BuildContext context) =>
-      MediaQuery.of(context).size.width >= 1100;
+  static bool isTablet(BuildContext context) {
+    final shortestSide = MediaQuery.of(context).size.shortestSide;
+
+    return shortestSide >= 650 && shortestSide < 1100;
+  }
+
+  static bool isDesktop(BuildContext context) {
+    return MediaQuery.of(context).size.shortestSide >= 1100;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (constraints.maxWidth >= 1100) {
-          return desktop;
-        } else if (constraints.maxWidth >= 650) {
-          return tablet ?? desktop;
-        } else {
-          return mobile;
-        }
-      },
-    );
+    final shortestSide = MediaQuery.of(context).size.shortestSide;
+
+    // ============================================================
+    // MOBILE
+    // ============================================================
+
+    if (shortestSide < 650) {
+      return mobile;
+    }
+
+    // ============================================================
+    // TABLET
+    // ============================================================
+
+    if (shortestSide < 1100) {
+      return tablet ?? desktop;
+    }
+
+    // ============================================================
+    // DESKTOP
+    // ============================================================
+
+    return desktop;
   }
 }

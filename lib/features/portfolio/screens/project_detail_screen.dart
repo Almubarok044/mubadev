@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../core/widgets/page_layout.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/interactive_cursor.dart';
@@ -14,7 +15,8 @@ class ProjectDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // If passed via route arguments or constructor
-    final routeProject = ModalRoute.of(context)?.settings.arguments as ProjectModel?;
+    final routeProject =
+        ModalRoute.of(context)?.settings.arguments as ProjectModel?;
     final currentProject = project ?? routeProject ?? ProjectModel.projects[0];
     bool isDark = Theme.of(context).brightness == Brightness.dark;
 
@@ -34,11 +36,18 @@ class ProjectDetailScreen extends StatelessWidget {
                     onTap: () => Navigator.pop(context),
                     borderRadius: BorderRadius.circular(8),
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 8.0,
+                        horizontal: 4.0,
+                      ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Icon(Icons.arrow_back_rounded, color: AppColors.primary, size: 20),
+                          Icon(
+                            Icons.arrow_back_rounded,
+                            color: AppColors.primary,
+                            size: 20,
+                          ),
                           const SizedBox(width: 8),
                           Text(
                             tr('detail_back'),
@@ -68,7 +77,10 @@ class ProjectDetailScreen extends StatelessWidget {
 
                 // Category & Title
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 7),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 7,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.primary.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(14),
@@ -99,6 +111,71 @@ class ProjectDetailScreen extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                     color: AppColors.primary,
+                  ),
+                ),
+
+                const SizedBox(height: 28),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: InkWell(
+                    onTap: () async {
+                      final uri = Uri.tryParse(currentProject.demoUrl);
+                      if (uri == null ||
+                          !uri.hasScheme ||
+                          (uri.scheme != 'http' && uri.scheme != 'https') ||
+                          uri.host.isEmpty) {
+                        debugPrint(
+                          'Invalid demo URL: ${currentProject.demoUrl}',
+                        );
+                        return;
+                      }
+
+                      if (!await launchUrl(
+                        uri,
+                        mode: LaunchMode.externalApplication,
+                      )) {
+                        debugPrint(
+                          'Could not launch ${currentProject.demoUrl}',
+                        );
+                      }
+                    },
+                    borderRadius: BorderRadius.circular(14),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 18,
+                        vertical: 12,
+                      ),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.circular(14),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.primary.withValues(alpha: 0.25),
+                            blurRadius: 14,
+                            offset: const Offset(0, 6),
+                          ),
+                        ],
+                      ),
+                      child: const Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.open_in_new_rounded,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                          SizedBox(width: 8),
+                          Text(
+                            'Live Demo',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
 
@@ -182,12 +259,17 @@ class ProjectDetailScreen extends StatelessWidget {
                   runSpacing: 10,
                   children: currentProject.technologies.map((tech) {
                     return Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 10,
+                      ),
                       decoration: BoxDecoration(
                         color: AppColors.surface(context),
                         borderRadius: BorderRadius.circular(14),
                         border: Border.all(
-                          color: isDark ? Colors.white12 : Colors.black.withValues(alpha: 0.08),
+                          color: isDark
+                              ? Colors.white12
+                              : Colors.black.withValues(alpha: 0.08),
                         ),
                         boxShadow: [
                           BoxShadow(

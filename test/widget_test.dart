@@ -8,23 +8,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:mubadev/main.dart';
+import 'package:mubadev/features/portfolio/models/project_model.dart';
+import 'package:mubadev/features/portfolio/screens/project_detail_screen.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  TestWidgetsFlutterBinding.ensureInitialized();
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  test('each project has a valid live demo URL', () {
+    for (final project in ProjectModel.projects) {
+      expect(project.demoUrl, isNotEmpty);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+      final uri = Uri.tryParse(project.demoUrl);
+      expect(uri, isNotNull);
+      expect(uri!.hasScheme, isTrue);
+      expect(uri.scheme, anyOf('http', 'https'));
+      expect(uri.host, isNotEmpty);
+    }
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  testWidgets('project detail screen shows live demo button', (tester) async {
+    final project = ProjectModel.projects.first;
+
+    tester.view.physicalSize = const Size(1440, 1200);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() => tester.view.resetPhysicalSize());
+    addTearDown(() => tester.view.resetDevicePixelRatio());
+
+    await tester.pumpWidget(
+      MaterialApp(home: ProjectDetailScreen(project: project)),
+    );
+
+    expect(find.text('Live Demo'), findsOneWidget);
   });
 }

@@ -8,7 +8,6 @@ import 'features/portfolio/models/project_model.dart';
 import 'features/about/screens/about_screen.dart';
 import 'features/about/screens/skills_screen.dart';
 import 'features/about/screens/experience_screen.dart';
-import 'features/contact/screens/contact_screen.dart';
 
 import 'core/theme/theme_manager.dart';
 import 'core/widgets/interactive_cursor.dart';
@@ -86,9 +85,6 @@ class MyApp extends StatelessWidget {
                 break;
               case '/experience':
                 page = const ExperienceScreen();
-                break;
-              case '/contact':
-                page = const ContactScreen();
                 break;
               default:
                 page = const HomeScreen();
