@@ -120,92 +120,32 @@ class AboutScreen extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Center(
-      child: SizedBox(
-        width: 350,
-        height: 400,
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            // ==================================================
-            // BACK CARD
-            // Card hitam di belakang.
-            // Bergeser ke kanan + bawah.
-            // ==================================================
-            Positioned(
-              left: 14,
-              top: 22,
-              child: Container(
-                width: 320,
-                height: 360,
-                decoration: BoxDecoration(
-                  color: isDark ? Colors.white12 : const Color(0xFF1C1C1C),
-                  borderRadius: BorderRadius.circular(24),
-
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.14),
-                      blurRadius: 20,
-                      offset: const Offset(0, 12),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            // ==================================================
-            // FRONT PHOTO CARD
-            // ==================================================
-            Positioned(
-              left: 0,
-              top: 0,
-              child: Container(
-                width: 320,
-                height: 360,
-
-                // ==================================================
-                // WHITE FRAME
-                // ==================================================
-                padding: const EdgeInsets.all(6),
-
-                decoration: BoxDecoration(
-                  color: isDark ? Colors.white : Colors.white,
-
-                  borderRadius: BorderRadius.circular(24),
-
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withValues(alpha: 0.10),
-                      blurRadius: 18,
-                      offset: const Offset(0, 10),
-                    ),
-                  ],
-                ),
-
-                // ==================================================
-                // FOTO
-                // ==================================================
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(18),
-                  child: Image.asset(
-                    'assets/images/me.png',
-                    fit: BoxFit.cover,
-
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: isDark
-                            ? Colors.grey.shade800
-                            : Colors.grey.shade300,
-
-                        child: const Center(
-                          child: Icon(Icons.person, size: 80),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
+      child: Container(
+        width: 320,
+        height: 360,
+        decoration: BoxDecoration(
+          color: AppColors.surface(context),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.1),
+              blurRadius: 15,
+              offset: const Offset(0, 8),
             ),
           ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Image.asset(
+            'assets/images/me.png',
+            fit: BoxFit.cover,
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                color: isDark ? Colors.grey.shade800 : Colors.grey.shade300,
+                child: const Center(child: Icon(Icons.person, size: 80)),
+              );
+            },
+          ),
         ),
       ),
     );

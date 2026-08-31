@@ -30,12 +30,12 @@ class ExperienceScreen extends StatelessWidget {
         'body':
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.',
       },
-      {
-        'period': '2018 - 2020',
-        'title': 'UI/UX Designer',
-        'body':
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis interdum. Vestibulum id ligula porta felis euismod semper. Donec ullamcorper nulla non metus auctor fringilla.',
-      },
+      // {
+      //   'period': '2018 - 2020',
+      //   'title': 'UI/UX Designer',
+      //   'body':
+      //       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas faucibus mollis interdum. Vestibulum id ligula porta felis euismod semper. Donec ullamcorper nulla non metus auctor fringilla.',
+      // },
     ];
 
     return PageLayout(

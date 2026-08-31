@@ -52,9 +52,15 @@ class PortfolioScreen extends StatelessWidget {
                         : 1,
                     crossAxisSpacing: 24,
                     mainAxisSpacing: 24,
-                    childAspectRatio: MediaQuery.of(context).size.width > 600
-                        ? 1.15
-                        : 0.95,
+                    // --- UBAH BAGIAN INI ---
+                    // childAspectRatio = Lebar / Tinggi.
+                    // Semakin kecil nilainya (< 1.0), semakin tinggi kartunya.
+                    childAspectRatio: MediaQuery.of(context).size.width > 900
+                        ? 0.82 // Desktop (2 kolom): Kartu dibuat lebih tinggi agar gambar proporsional
+                        : MediaQuery.of(context).size.width > 600
+                        ? 1.2 // Tablet (1 kolom): Lebar memanjang, jadi rasio sedikit dinaikkan agar tidak raksasa
+                        : 0.70, // Mobile (1 kolom): Dibuat sangat tinggi agar gambar & teks muat dengan baik
+                    // -----------------------
                   ),
                   itemCount: projects.length,
                   itemBuilder: (context, index) {
@@ -153,7 +159,9 @@ class _HoverPortfolioCardState extends State<HoverPortfolioCard> {
                   children: [
                     Expanded(
                       child: ProjectImage(
-                        imageAsset: widget.project.imageAsset,
+                        imageAsset: widget
+                            .project
+                            .thumbnailAsset, // <-- DIUBAH KE thumbnailAsset
                         title: widget.project.title,
                         category: widget.project.category,
                         borderRadius: BorderRadius.circular(14),

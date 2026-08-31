@@ -20,6 +20,7 @@ void main() async {
     EasyLocalization(
       supportedLocales: const [Locale('en'), Locale('id')],
       path: 'assets/translations',
+      assetLoader: const RootBundleAssetLoader(),
       fallbackLocale: const Locale('en'),
       startLocale: const Locale('en'),
       child: const MyApp(),

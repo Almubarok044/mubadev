@@ -5,7 +5,9 @@ class ProjectModel {
   final String category;
   final String shortDescription;
   final String fullDescription;
-  final String imageAsset;
+  final String
+  thumbnailAsset; // <-- TAMBAHKAN INI (Khusus Thumbnail Mockup di Halaman Awal)
+  final String imageAsset; // (Khusus Screenshot Asli di Halaman Detail)
   final String demoUrl;
   final List<String> technologies;
   final List<String> features;
@@ -17,6 +19,7 @@ class ProjectModel {
     required this.category,
     required this.shortDescription,
     required this.fullDescription,
+    required this.thumbnailAsset, // <-- TAMBAHKAN DI CONSTRUCTOR
     required this.imageAsset,
     required this.demoUrl,
     required this.technologies,
@@ -36,12 +39,14 @@ class ProjectModel {
       id: 'hidroponik-app',
       title: 'Hidroponik App',
       subtitle: 'Monitoring & Kontrol Sistem Hidroponik Modern',
-      category: 'IoT-Enabled Multiplatform Web & Mobile App',
+      category: 'IoT-Enabled Web & Mobile App',
       shortDescription:
           'Solusi cerdas berbasis real-time untuk memantau dan mengendalikan sistem budidaya hidroponik dengan kontrol presisi.',
       fullDescription:
           'Hidroponik App adalah solusi cerdas untuk memantau dan mengendalikan sistem budidaya hidroponik Anda. Dengan teknologi real-time, aplikasi ini memudahkan petani modern untuk mengoptimalkan hasil panen dengan kontrol presisi terhadap kondisi lingkungan tanaman.',
-      imageAsset: 'assets/images/hidroponik.png',
+      // thumbnailAsset: 'assets/mockup/hidroponik.png', // <-- Foto mockup device
+      thumbnailAsset: 'assets/images/hidroponik.png', // <-- Foto mockup device
+      imageAsset: 'assets/images/hidroponik.png', // <-- Screenshot asli website
       demoUrl: 'https://skripsihidroponik-with-iot.web.app/',
       technologies: ['Flutter', 'IoT', 'Firebase', 'ESP32 / Sensors', 'Dart'],
       features: [
@@ -59,7 +64,9 @@ class ProjectModel {
           'Aplikasi manajemen transaksi penjualan dengan pengelolaan pelanggan, inventaris barang, dan ekspor faktur PDF.',
       fullDescription:
           'Aplikasi ini adalah proyek Flutter untuk mengelola transaksi penjualan secara digital. Aplikasi ini mencakup fitur utama seperti manajemen pelanggan, pengelolaan barang, pembuatan faktur, serta ekspor dokumen faktur ke format PDF.',
-      imageAsset: 'assets/images/invoice.png',
+      // thumbnailAsset: 'assets/mockup/invoice.png', // <-- Foto mockup device
+      thumbnailAsset: 'assets/images/invoice.png', // <-- Foto mockup device
+      imageAsset: 'assets/images/invoice.png', // <-- Screenshot asli website
       demoUrl: 'https://penjualanberbasisfaktur.web.app/',
       technologies: [
         'Flutter',
@@ -83,7 +90,9 @@ class ProjectModel {
           'Single Page Application profil bisnis Bengkel Las 999 Cibinong yang dioptimalkan untuk konversi dengan WhatsApp & Maps.',
       fullDescription:
           'Website ini merupakan landing page profil bisnis dan portofolio untuk Bengkel Las 999 yang berlokasi di Cibinong, Kabupaten Bogor. Website ini dirancang sebagai platform company profile satu halaman (Single Page Application/Landing Page) yang dioptimalkan untuk konversi prospek melalui fitur panggilan darurat, integrasi WhatsApp, dan penunjuk arah Google Maps.',
-      imageAsset: 'assets/images/welding.png',
+      thumbnailAsset:
+          'assets/mockup/weldingmockup.png', // <-- Foto mockup device
+      imageAsset: 'assets/images/welding.png', // <-- Screenshot asli website
       demoUrl: 'https://bengkellas999.netlify.app/',
       technologies: [
         'Flutter Web',
@@ -106,7 +115,9 @@ class ProjectModel {
           'Aplikasi katalog produk digital modern untuk brand Es Mambo Lasmi, menampilkan lini produk segar dan hampers premium.',
       fullDescription:
           'Aplikasi katalog produk digital untuk brand Es Mambo Lasmi, dibuat dengan Flutter. Aplikasi ini menampilkan produk utama seperti Es Mambo, Es Jelly, dan berbagai pilihan kue kering serta hampers premium dengan desain modern yang responsif untuk desktop dan mobile.',
-      imageAsset: 'assets/images/icemambo.png',
+      thumbnailAsset:
+          'assets/mockup/icemambomockup.png', // <-- Foto mockup device
+      imageAsset: 'assets/images/icemambo.png', // <-- Screenshot asli website
       demoUrl: 'https://es-mambo-lasmi.web.app/',
       technologies: [
         'Flutter',
