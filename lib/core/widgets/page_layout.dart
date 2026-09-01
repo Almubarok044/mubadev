@@ -244,7 +244,7 @@ class GridPainter extends CustomPainter {
       ..color = gridColor
       ..strokeWidth = 1.0;
 
-    const double spacing = 40.0;
+    const double spacing = 30.0; // Diperkecil agar grid lebih rapat
 
     // ============================================================
     // VERTICAL LINES

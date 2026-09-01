@@ -65,7 +65,7 @@ class CustomFooter extends StatelessWidget {
                       children: [
                         Image.asset(
                           isDark
-                              ? 'assets/icon/mubarokdeveloperlight.png'
+                              ? 'assets/icon/mubarokdeveloperlight2.png'
                               : 'assets/icon/mubarokdeveloper.png',
                           height: 48,
                           fit: BoxFit.contain,
@@ -83,7 +83,7 @@ class CustomFooter extends StatelessWidget {
                       children: [
                         Image.asset(
                           isDark
-                              ? 'assets/icon/mubarokdeveloperlight.png'
+                              ? 'assets/icon/mubarokdeveloperlight2.png'
                               : 'assets/icon/mubarokdeveloper.png',
                           height: 52,
                           fit: BoxFit.contain,

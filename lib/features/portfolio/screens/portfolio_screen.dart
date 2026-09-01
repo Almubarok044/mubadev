@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../../core/widgets/page_layout.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/interactive_cursor.dart';
@@ -56,10 +55,10 @@ class PortfolioScreen extends StatelessWidget {
                     // childAspectRatio = Lebar / Tinggi.
                     // Semakin kecil nilainya (< 1.0), semakin tinggi kartunya.
                     childAspectRatio: MediaQuery.of(context).size.width > 900
-                        ? 0.82 // Desktop (2 kolom): Kartu dibuat lebih tinggi agar gambar proporsional
+                        ? 1.15 // Desktop (2 kolom)
                         : MediaQuery.of(context).size.width > 600
-                        ? 1.2 // Tablet (1 kolom): Lebar memanjang, jadi rasio sedikit dinaikkan agar tidak raksasa
-                        : 0.70, // Mobile (1 kolom): Dibuat sangat tinggi agar gambar & teks muat dengan baik
+                        ? 1.4 // Tablet (1 kolom)
+                        : 0.95, // Mobile (1 kolom)
                     // -----------------------
                   ),
                   itemCount: projects.length,
@@ -170,142 +169,35 @@ class _HoverPortfolioCardState extends State<HoverPortfolioCard> {
                     const SizedBox(height: 16),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 6,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.primary.withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
+                        Expanded(
                           child: Text(
-                            widget.project.category,
+                            widget.project.title,
                             style: TextStyle(
-                              color: AppColors.primary,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              fontSize: 12,
+                              color: AppColors.textMain(context),
                             ),
                           ),
                         ),
+                        const SizedBox(width: 12),
                         Icon(
-                          Icons.arrow_forward_rounded,
-                          size: 20,
+                          Icons.arrow_outward_rounded,
+                          size: 22,
                           color: _isHovered
                               ? AppColors.primary
                               : AppColors.textSecondary(context),
                         ),
                       ],
                     ),
-                    const SizedBox(height: 12),
-                    Text(
-                      widget.project.title,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.textMain(context),
-                      ),
-                    ),
                     const SizedBox(height: 6),
                     Text(
-                      widget.project.shortDescription,
-                      textAlign: TextAlign.center,
+                      '${widget.project.category.tr()}  |  2025 - ${'country_indonesia'.tr()}',
                       style: TextStyle(
                         color: AppColors.textSecondary(context),
-                        fontSize: 15,
-                        height: 1.5,
+                        fontSize: 13,
                       ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 12),
-                    Wrap(
-                      spacing: 6,
-                      runSpacing: 6,
-                      children: widget.project.technologies.take(3).map((tech) {
-                        return Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 8,
-                            vertical: 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: isDark
-                                ? Colors.white.withValues(alpha: 0.05)
-                                : Colors.black.withValues(alpha: 0.04),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(
-                            tech,
-                            style: TextStyle(
-                              fontSize: 11,
-                              color: AppColors.textSecondary(context),
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                    const SizedBox(height: 14),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        InkWell(
-                          onTap: () async {
-                            final uri = Uri.tryParse(widget.project.demoUrl);
-                            if (uri == null ||
-                                !uri.hasScheme ||
-                                (uri.scheme != 'http' &&
-                                    uri.scheme != 'https') ||
-                                uri.host.isEmpty) {
-                              debugPrint(
-                                'Invalid demo URL: ${widget.project.demoUrl}',
-                              );
-                              return;
-                            }
-
-                            if (!await launchUrl(
-                              uri,
-                              mode: LaunchMode.externalApplication,
-                            )) {
-                              debugPrint(
-                                'Could not launch ${widget.project.demoUrl}',
-                              );
-                            }
-                          },
-                          borderRadius: BorderRadius.circular(12),
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 14,
-                              vertical: 10,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.primary,
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: const Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.open_in_new_rounded,
-                                  color: Colors.white,
-                                  size: 16,
-                                ),
-                                SizedBox(width: 6),
-                                Text(
-                                  'Live Demo',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 ),

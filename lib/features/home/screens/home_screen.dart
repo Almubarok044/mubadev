@@ -285,7 +285,7 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
                   child: ProjectImage(
                     imageAsset: widget.project.imageAsset,
                     title: widget.project.title,
-                    category: widget.project.category,
+                    category: widget.project.category.tr(),
                     borderRadius: BorderRadius.circular(14),
                   ),
                 ),
@@ -303,7 +303,7 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
-                        widget.project.category,
+                        widget.project.category.tr(),
                         style: TextStyle(
                           color: AppColors.primary,
                           fontWeight: FontWeight.bold,
@@ -331,7 +331,7 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  widget.project.shortDescription,
+                  widget.project.shortDescription.tr(),
                   style: TextStyle(
                     color: AppColors.textSecondary(context),
                     fontSize: 13,
