@@ -36,7 +36,6 @@ jobs:
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.1//0gThHgSOTBk5bCgYIARAAGBASNwF-L9IrdamwfLkC7souJ7TCt5PeljXkB4yUnyTNzbnfpr9lWSZXs4OPlFcBOQIOj0GVWEt1cUI }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_MUBADEV }}"
           channelId: live
-        env:
-          FIREBASE_CLI_EXPERIMENTS: webframeworks
+          projectId: ${{ secrets.FIREBASE_PROJECT_ID_MUBADEV }}
