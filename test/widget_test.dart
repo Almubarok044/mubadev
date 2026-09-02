@@ -38,6 +38,8 @@ void main() {
       MaterialApp(home: ProjectDetailScreen(project: project)),
     );
 
-    expect(find.text('Live Demo'), findsOneWidget);
+    await tester.pumpAndSettle();
+
+    expect(find.text('detail_live_demo'), findsOneWidget);
   });
 }

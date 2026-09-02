@@ -467,12 +467,14 @@ class _HoverInfoCardState extends State<HoverInfoCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  widget.title,
-                  style: TextStyle(
-                    color: AppColors.textSecondary(context),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
+                Expanded(
+                  child: Text(
+                    widget.title,
+                    style: TextStyle(
+                      color: AppColors.textSecondary(context),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
                 Container(
