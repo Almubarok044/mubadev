@@ -105,6 +105,11 @@ flutter:
     - assets/translations/
     - assets/mockup/icemambomockup.png
     - assets/mockup/weldingmockup.png
+    - assets/icon/github.svg
+    - assets/icon/instagram.svg
+    - assets/icon/linkedin.svg
+    - assets/icon/youtube.svg
+    - assets/icon/facebook.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

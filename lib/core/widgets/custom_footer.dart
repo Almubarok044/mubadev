@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:mubadev/core/theme/app_colors.dart';
 import 'interactive_cursor.dart';
@@ -109,7 +109,7 @@ class CustomFooter extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         _SocialButton(
-          icon: FontAwesomeIcons.github,
+          iconPath: 'assets/icon/github.svg',
           url: 'https://github.com/Almubarok044',
           hoverColor: const Color(0xFF181717),
         ),
@@ -117,7 +117,7 @@ class CustomFooter extends StatelessWidget {
         const SizedBox(width: 10),
 
         _SocialButton(
-          icon: FontAwesomeIcons.instagram,
+          iconPath: 'assets/icon/instagram.svg',
           url: 'https://www.instagram.com/_kai.butsu',
           hoverColor: const Color(0xFFE4405F),
         ),
@@ -125,7 +125,7 @@ class CustomFooter extends StatelessWidget {
         const SizedBox(width: 10),
 
         _SocialButton(
-          icon: FontAwesomeIcons.linkedinIn,
+          iconPath: 'assets/icon/linkedin.svg',
           url: 'https://www.linkedin.com/in/mohamad-almubarok-107259284',
           hoverColor: const Color(0xFF0A66C2),
         ),
@@ -133,7 +133,7 @@ class CustomFooter extends StatelessWidget {
         const SizedBox(width: 10),
 
         _SocialButton(
-          icon: FontAwesomeIcons.youtube,
+          iconPath: 'assets/icon/youtube.svg',
           url: 'https://www.youtube.com/@skullaogaog',
           hoverColor: const Color(0xFFFF0000),
         ),
@@ -141,7 +141,7 @@ class CustomFooter extends StatelessWidget {
         const SizedBox(width: 10),
 
         _SocialButton(
-          icon: FontAwesomeIcons.facebookF,
+          iconPath: 'assets/icon/facebook.svg',
           url: 'https://www.facebook.com/profile.php?id=61574267874258',
           hoverColor: const Color(0xFF1877F2),
         ),
@@ -154,13 +154,17 @@ class CustomFooter extends StatelessWidget {
 // SOCIAL BUTTON
 // ============================================================
 
+// ============================================================
+// SOCIAL BUTTON (Diperbarui menggunakan SVG)
+// ============================================================
+
 class _SocialButton extends StatefulWidget {
-  final dynamic icon;
+  final String iconPath; // Ubah dynamic icon menjadi String iconPath
   final String url;
   final Color hoverColor;
 
   const _SocialButton({
-    required this.icon,
+    required this.iconPath,
     required this.url,
     required this.hoverColor,
   });
@@ -174,7 +178,6 @@ class _SocialButtonState extends State<_SocialButton> {
 
   Future<void> _launchUrl() async {
     final Uri uri = Uri.parse(widget.url);
-
     if (!await launchUrl(uri)) {
       debugPrint('Could not launch ${widget.url}');
     }
@@ -184,40 +187,24 @@ class _SocialButtonState extends State<_SocialButton> {
   Widget build(BuildContext context) {
     return CursorHideRegion(
       child: MouseRegion(
-        onEnter: (_) {
-          setState(() {
-            _isHovered = true;
-          });
-        },
-
-        onExit: (_) {
-          setState(() {
-            _isHovered = false;
-          });
-        },
-
+        onEnter: (_) => setState(() => _isHovered = true),
+        onExit: (_) => setState(() => _isHovered = false),
         child: InkWell(
           onTap: _launchUrl,
           borderRadius: BorderRadius.circular(10),
-
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-
             padding: const EdgeInsets.all(9),
-
             decoration: BoxDecoration(
               color: _isHovered
                   ? widget.hoverColor
                   : AppColors.surface(context),
-
               borderRadius: BorderRadius.circular(10),
-
               border: Border.all(
                 color: _isHovered
                     ? widget.hoverColor
                     : AppColors.divider(context),
               ),
-
               boxShadow: [
                 if (_isHovered)
                   BoxShadow(
@@ -227,15 +214,16 @@ class _SocialButtonState extends State<_SocialButton> {
                   ),
               ],
             ),
-
-            child: FaIcon(
-              widget.icon,
-
-              color: _isHovered
-                  ? Colors.white
-                  : AppColors.textSecondary(context),
-
-              size: 18,
+            child: SvgPicture.asset(
+              widget.iconPath,
+              width: 18,
+              height: 18,
+              // ColorFilter ini akan mengganti warna asli SVG
+              // menjadi warna hover atau warna text secondary
+              colorFilter: ColorFilter.mode(
+                _isHovered ? Colors.white : AppColors.textSecondary(context),
+                BlendMode.srcIn,
+              ),
             ),
           ),
         ),
