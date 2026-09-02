@@ -17,11 +17,9 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.41.1" # Sesuaikan dengan versi Flutter yang lo pakai sekarang
           channel: "stable"
 
       - name: Install Dependencies
-        uses: subosito/flutter-action@v2 # Opsional, atau langsung pakai flutter pub get
         run: flutter pub get
 
       - name: Analyze Code
