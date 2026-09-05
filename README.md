@@ -1,255 +1,305 @@
-<<<<<<< HEAD
-# mubadev
-Portfolio website dan aplikasi personal berbasis Flutter yang menampilkan profil, proyek, keahlian, pengalaman, serta kontak. Aplikasi ini dirancang sebagai landing page personal yang responsif dan multi-platform, dengan dukungan tema gelap/terang serta lokalisasi Bahasa Indonesia dan Inggris.
-=======
-# Mubadev
+Berikut adalah file `README.md` yang telah diperbarui dengan penambahan emoji yang relevan di setiap bagian, judul, daftar, hingga langkah-langkah *setup*.
 
-Portfolio website dan aplikasi personal berbasis Flutter yang menampilkan profil, proyek, keahlian, pengalaman, serta kontak. Aplikasi ini dirancang sebagai landing page personal yang responsif dan multi-platform, dengan dukungan tema gelap/terang serta lokalisasi Bahasa Indonesia dan Inggris.
+Penambahan emoji ini dirancang untuk membuat **hierarki visual** menjadi lebih jelas, mempermudah pemindaian (*scanning*), dan membantu pembaca memahami alur serta struktur proyek secara lebih intuitif.
 
-## Ringkasan Proyek
+---
 
-Proyek ini dibuat untuk menampilkan identitas dan karya dari Mohamad Almubarok sebagai pengembang aplikasi dan software engineer. UI utamanya terdiri dari:
+```markdown
+# 👨‍💻 Mubadev
 
-- halaman beranda / hero section
-- halaman tentang saya
-- halaman keahlian
-- halaman proyek / portofolio
-- halaman detail proyek
-- halaman kontak
+Portfolio website dan aplikasi personal berbasis **Flutter** 🚀 yang menampilkan profil, proyek, keahlian, pengalaman, serta kontak. Aplikasi ini dirancang sebagai *landing page* personal yang responsif dan multi-platform, dilengkapi dengan dukungan tema gelap/terang 🌙/☀️ serta lokalisasi Bahasa Indonesia dan Inggris 🇮🇩/🇬🇧.
 
-Aplikasi ini dapat dijalankan di berbagai platform Flutter seperti Android, iOS, Web, Linux, macOS, dan Windows.
+---
 
-## Teknologi yang Digunakan
+## 📌 Ringkasan Proyek
 
-- Flutter
-- Dart
-- Material 3
-- easy_localization
-- flutter_svg
-- url_launcher
-- font_awesome_flutter
+Proyek ini dibuat untuk menampilkan identitas dan karya dari **Mohamad Almubarok** sebagai pengembang aplikasi dan *software engineer*. UI utamanya terdiri dari:
 
-## Struktur Folder
+- 🏠 **Halaman Beranda / Hero Section**
+- 👤 **Halaman Tentang Saya**
+- ⚡ **Halaman Keahlian**
+- 📂 **Halaman Proyek / Portofolio**
+- 🔍 **Halaman Detail Proyek**
+- 📬 **Halaman Kontak**
+
+📱💻 Aplikasi ini dapat dijalankan di berbagai platform supported Flutter seperti **Android, iOS, Web, Linux, macOS, dan Windows**.
+
+---
+
+## 🛠️ Teknologi yang Digunakan
+
+- 💙 **Flutter** (Cross-platform Framework)
+- 🎯 **Dart** (Programming Language)
+- 🎨 **Material 3** (Design System)
+- 🌐 **easy_localization** (Internationalization)
+- 🖼️ **flutter_svg** (SVG Support)
+- 🔗 **url_launcher** (External Links Launcher)
+- 🎨 **font_awesome_flutter** (Icon Pack)
+
+---
+
+## 📂 Struktur Folder
 
 ```text
 mubadev/
-├── android/
-├── ios/
-├── linux/
-├── macos/
-├── windows/
-├── web/
-├── assets/
-│   ├── icon/
-│   ├── images/
-│   └── translations/
-├── lib/
-│   ├── core/
-│   │   ├── constants/
-│   │   ├── theme/
-│   │   └── widgets/
-│   ├── features/
-│   │   ├── about/
-│   │   ├── contact/
-│   │   ├── home/
-│   │   └── portfolio/
-│   ├── main.dart
-├── analysis_options.yaml
-├── pubspec.yaml
-├── README.md
-└── test/
+├── 🤖 android/
+├── 🍎 ios/
+├── 🐧 linux/
+├── 💻 macos/
+├── 🪟 windows/
+├── 🌐 web/
+├── 📦 assets/
+│   ├── 🎨 icon/
+│   ├── 🖼️ images/
+│   └── 🌐 translations/
+├── 🧠 lib/
+│   ├── ⚙️ core/
+│   │   ├── 🎨 constants/
+│   │   ├── 🎭 theme/
+│   │   └── 🧩 widgets/
+│   ├── 🍱 features/
+│   │   ├── 👤 about/
+│   │   ├── 📬 contact/
+│   │   ├── 🏠 home/
+│   │   └── 📂 portfolio/
+│   └── 🏁 main.dart
+├── 📋 analysis_options.yaml
+├── 📦 pubspec.yaml
+├── 📜 README.md
+└── 🧪 test/
+
 ```
 
-## Arsitektur Aplikasi
+---
 
-### 1. Entry Point
-Aplikasi dimulai dari `lib/main.dart`. Pada file ini:
+## 🏗️ Arsitektur Aplikasi
 
-- inisialisasi `EasyLocalization`
-- menetapkan locale default dan locale yang didukung
-- menyiapkan `ThemeManager`
-- mengatur route generator untuk navigasi antar halaman
-- menambahkan `InteractiveCursor` sebagai wrapping global untuk efek kursor interaktif
+### 1. 🏁 Entry Point
 
-### 2. Theme dan Styling
+Aplikasi dimulai dari `lib/main.dart`. Pada file ini dilakukan:
+
+* 🌐 Inisialisasi `EasyLocalization`
+* 🗺️ Menetapkan *locale* default dan yang didukung
+* 🎨 Menyiapkan `ThemeManager`
+* 🛣️ Mengatur *route generator* untuk navigasi antar halaman
+* 🖱️ Menambahkan `InteractiveCursor` sebagai *wrapping* global untuk efek kursor interaktif
+
+### 2. 🎭 Theme dan Styling
+
 Folder `lib/core/theme/` berisi konfigurasi tampilan aplikasi:
 
-- `app_colors.dart`: definisi warna utama, gradient, dan helper warna berdasarkan tema
-- `theme_manager.dart`: pengelola mode gelap/terang dengan `ValueNotifier<ThemeMode>`
+* 🎨 `app_colors.dart`: Definisi warna utama, *gradient*, dan *helper* warna berdasarkan tema
+* 🌗 `theme_manager.dart`: Pengelola mode gelap/terang dengan `ValueNotifier<ThemeMode>`
 
-### 3. Layout Umum
+### 3. 🧩 Layout Umum
+
 Folder `lib/core/widgets/` berisi komponen reusable:
 
-- `page_layout.dart`: layout utama dengan navbar, latar belakang grid, dan footer
-- `custom_navbar.dart`: navigasi utama serta tombol toggle tema dan bahasa
-- `custom_footer.dart`: footer dengan tautan sosial
-- `interactive_cursor.dart`: efek kursor custom dan region yang menyembunyikan kursor
-- `responsive_layout.dart`: helper layout responsif
-- `infinite_marquee.dart`: komponen marquee untuk tampilan keahlian
+* 📐 `page_layout.dart`: Layout utama dengan navbar, latar belakang grid, dan footer
+* 🧭 `custom_navbar.dart`: Navigasi utama serta tombol *toggle* tema dan bahasa
+* 🦶 `custom_footer.dart`: Footer dengan tautan media sosial
+* 🖱️ `interactive_cursor.dart`: Efek kursor custom dan region khusus
+* 📱 `responsive_layout.dart`: Helper layout responsif
+* 📜 `infinite_marquee.dart`: Komponen *marquee* untuk animasi tampilan keahlian
 
-### 4. Feature-based Structure
+### 4. 🍱 Feature-based Structure
+
 Setiap fitur dipisah berdasarkan domain:
 
-- `features/home`: beranda / hero section dan project highlight
-- `features/about`: halaman tentang, skills, dan experience
-- `features/portfolio`: daftar proyek dan detail proyek
-- `features/contact`: form kontak dan info kontak
+* 🏠 `features/home`: Beranda / *hero section* dan *project highlight*
+* 👤 `features/about`: Halaman tentang, *skills*, dan *experience*
+* 📂 `features/portfolio`: Daftar proyek dan detail proyek
+* 📬 `features/contact`: Form kontak dan info kontak
 
-## Fitur Utama
+---
 
-### Halaman Beranda
-- hero text dengan nama dan tagline
-- tombol navigasi ke proyek dan kontak
-- project highlight card
-- desain modern dengan efek hover dan kustom cursor
+## ✨ Fitur Utama
 
-### Halaman Portofolio
-- daftar proyek dalam bentuk grid
-- navigasi menuju detail proyek
-- informasi kategori, teknologi, dan deskripsi singkat
+* 🏠 **Halaman Beranda**
+* Hero text dengan nama dan tagline
+* Tombol navigasi ke proyek dan kontak
+* *Project highlight card*
+* Desain modern dengan efek hover & custom cursor
 
-### Halaman Detail Proyek
-- preview gambar proyek
-- deskripsi latar belakang
-- fitur utama
-- teknologi yang dipakai
 
-### Halaman Tentang
-- profil singkat dan deskripsi diri
-- layout responsif untuk mobile dan desktop
+* 📂 **Halaman Portofolio**
+* Daftar proyek dalam bentuk *grid*
+* Navigasi menuju detail proyek
+* Informasi kategori, teknologi, dan deskripsi singkat
 
-### Halaman Keahlian
-- skill card dengan marquee animation
-- menampilkan stack teknologi dan tools yang digunakan
 
-### Halaman Kontak
-- form pesan
-- info kontak
-- tombol social media
+* 🔍 **Halaman Detail Proyek**
+* Preview gambar proyek
+* Deskripsi latar belakang & fitur utama
+* Stack teknologi yang dipakai
 
-### Fitur Tambahan
-- dark mode / light mode
-- dukungan dua bahasa: Indonesia dan Inggris
-- layout responsif untuk layar kecil dan besar
-- efek hover dan animasi kecil untuk pengalaman UI yang lebih dinamis
 
-## Routing
+* 👤 **Halaman Tentang**
+* Profil singkat dan deskripsi diri
+* Layout responsif untuk mobile & desktop
 
-Aplikasi menggunakan `onGenerateRoute` di `lib/main.dart` dengan route berikut:
 
-- `/` → `HomeScreen`
-- `/work` → `PortfolioScreen`
-- `/project_detail` → `ProjectDetailScreen`
-- `/about` → `AboutScreen`
-- `/skills` → `SkillsScreen`
-- `/experience` → `ExperienceScreen`
-- `/contact` → `ContactScreen`
+* ⚡ **Halaman Keahlian**
+* *Skill card* dengan animasi marquee
+* Menampilkan stack teknologi dan *tools*
 
-## Data Proyek
 
-Data proyek tersimpan dalam `lib/features/portfolio/models/project_model.dart`.
+* 📬 **Halaman Kontak**
+* Form pesan & info kontak
+* Tombol tautan media sosial
 
-Saat ini terdapat beberapa proyek sampel, seperti:
 
-- Hidroponik App
-- Invoice-Based Sales System
-- Welding Workshop
-- Ice Mambo Lasmi
+* 💡 **Fitur Tambahan**
+* 🌗 Dark mode / Light mode
+* 🌐 Dukungan dua bahasa: Indonesia 🇮🇩 dan Inggris 🇬🇧
+* 📱 Layout responsif untuk berbagai ukuran layar
+* ✨ Efek hover dan animasi mikro untuk UI dinamis
 
-Setiap model berisi:
 
-- id
-- title
-- subtitle
-- category
-- shortDescription
-- fullDescription
-- imageAsset
-- technologies
-- features
 
-## Localization
+---
 
-File terjemahan berada di `assets/translations/`:
+## 🛣️ Routing
 
-- `en.json`
-- `id.json`
+Aplikasi menggunakan `onGenerateRoute` di `lib/main.dart` dengan *route* sebagai berikut:
 
-Aplikasi menggunakan `easy_localization` untuk mempermudah perubahan bahasa sesuai kebutuhan.
+| Route | Halaman / Screen | Deskripsi |
+| --- | --- | --- |
+| `/` | 🏠 `HomeScreen` | Halaman Utama / Hero |
+| `/work` | 📂 `PortfolioScreen` | Daftar Portofolio |
+| `/project_detail` | 🔍 `ProjectDetailScreen` | Detail Informasi Proyek |
+| `/about` | 👤 `AboutScreen` | Profil & Deskripsi |
+| `/skills` | ⚡ `SkillsScreen` | Daftar Keahlian |
+| `/experience` | 💼 `ExperienceScreen` | Pengalaman Kerja |
+| `/contact` | 📬 `ContactScreen` | Form & Informasi Kontak |
 
-## Setup dan Menjalankan Aplikasi
+---
 
-### Prasyarat
+## 📊 Data Proyek
 
-Pastikan Flutter sudah terinstall di sistem Anda.
+Data proyek tersimpan secara terstruktur di `lib/features/portfolio/models/project_model.dart`.
+
+Contoh beberapa proyek sampel:
+
+* 🌿 **Hidroponik App**
+* 🧾 **Invoice-Based Sales System**
+* 🛠️ **Welding Workshop**
+* 🍦 **Ice Mambo Lasmi**
+
+Setiap data model memuat:
+
+`id` • `title` • `subtitle` • `category` • `shortDescription` • `fullDescription` • `imageAsset` • `technologies` • `features`
+
+---
+
+## 🌐 Localization
+
+File terjemahan tersimpan pada folder `assets/translations/`:
+
+* 🇬🇧 `en.json` (English)
+* 🇮🇩 `id.json` (Bahasa Indonesia)
+
+Pengelolaan bahasa menggunakan paket `easy_localization` ⚡ untuk pergantian bahasa secara *real-time*.
+
+---
+
+## 🚀 Setup dan Menjalankan Aplikasi
+
+### 1. ⚙️ Prasyarat
+
+Pastikan Flutter SDK sudah terpasang di sistem Anda.
 
 ```bash
 flutter --version
+
 ```
 
-### Install Dependensi
+### 2. 📥 Install Dependensi
+
+Unduh paket/library yang dibutuhkan:
 
 ```bash
 flutter pub get
+
 ```
 
-### Jalankan Aplikasi
+### 3. ▶️ Jalankan Aplikasi
+
+Jalankan pada *device/emulator* default:
 
 ```bash
 flutter run
+
 ```
 
-### Jalankan di Web
+Jalankan khusus di browser (Web):
 
 ```bash
 flutter run -d chrome
+
 ```
 
-### Build Produksi
+### 📦 Build Produksi
 
-#### Web
-
+* **Versi Web:**
 ```bash
 flutter build web
+
 ```
 
-#### Android
 
+* **Versi Android (APK):**
 ```bash
 flutter build apk
+
 ```
 
-## Catatan Penting
 
-- Sebagian halaman masih merupakan prototype atau placeholder, misalnya halaman pengalaman (`ExperienceScreen`) yang belum diisi konten detail.
-- Form kontak pada halaman kontak masih bersifat statis dan belum terhubung ke backend atau email service.
-- Beberapa tombol sosial dan aksi navigasi sudah siap digunakan tetapi dapat disesuaikan nanti sesuai kebutuhan branding atau kebutuhan bisnis.
 
-## Pengembangan Selanjutnya
+---
 
-Beberapa hal yang bisa ditambahkan di masa depan:
+## ⚠️ Catatan Penting
 
-- backend untuk form kontak
-- halaman pengalaman yang lebih lengkap dengan timeline kerja
-- CMS atau data proyek dari API/JSON
-- integrasi analytics
-- optimasi SEO untuk versi web
-- testing widget atau unit test
+* 🏗️ Sebagian halaman masih merupakan *prototype* atau *placeholder* (misalnya halaman pengalaman/`ExperienceScreen`).
+* 📮 Form kontak pada halaman kontak masih bersifat statis dan belum terhubung ke service backend/email.
+* 🔗 Tautan media sosial dan navigasi dasar sudah siap digunakan dan dapat disesuaikan kembali sesuai kebutuhan *branding*.
 
-## Kontribusi
+---
 
-Proyek ini dapat dikembangkan lebih lanjut sesuai kebutuhan portfolio atau personal branding. Jika ingin menyesuaikan konten, lakukan perubahan di:
+## 🔮 Pengembangan Selanjutnya
 
-- `lib/features/...` untuk layar dan komponen
-- `assets/translations/*.json` untuk teks dan label
-- `lib/features/portfolio/models/project_model.dart` untuk daftar proyek
-- `lib/core/theme/app_colors.dart` untuk warna brand
+Rencana fitur dan peningkatan di masa mendatang:
 
-## Lisensi
+* 🧱 Backend terintegrasi untuk form kontak
+* 📜 Halaman pengalaman kerja berbasis *interactive timeline*
+* 📰 Integrasi CMS atau API/JSON eksternal untuk data proyek
+* 📈 Integrasi Web Analytics
+* 🔍 Optimasi SEO (Search Engine Optimization) untuk versi Web
+* 🧪 Unit Testing & Widget Testing
 
-Proyek ini bersifat internal / personal, dan belum ditentukan lisensi publik. Jika diperlukan, sesuaikan lisensi sesuai kebutuhan penggunaan.
+---
 
-## Informasi Tambahan
+## 🤝 Kontribusi
 
-Aplikasi ini dibuat dengan pendekatan portfolio app yang fokus pada presensi digital dan personal branding. Struktur project sudah dibuat modular, sehingga mudah untuk dikembangkan menjadi versi yang lebih besar atau ditambahkan fitur baru.
->>>>>>> 324df6f (Add a new repo to github)
+Proyek ini dibuat untuk kebutuhan portofolio dan *personal branding*. Jika ingin menyesuaikan konten:
+
+* 📱 `lib/features/...` → Modifikasi layar dan komponen UI
+* 🌐 `assets/translations/*.json` → Edit teks/label terjemahan
+* 📊 `lib/features/portfolio/models/project_model.dart` → Edit daftar proyek
+* 🎨 `lib/core/theme/app_colors.dart` → Ubah skema warna *brand*
+
+---
+
+## 📜 Lisensi
+
+Proyek ini bersifat **Internal / Personal**. Lisensi publik belum ditentukan.
+
+---
+
+## ℹ️ Informasi Tambahan
+
+Aplikasi ini dibangun dengan fokus utama pada **presensi digital** dan **personal branding**. Menggunakan arsitektur yang modular, proyek ini sangat mudah dikembangkan, di-maintain, dan ditambah dengan fitur-fitur baru di masa depan! ✨
+
+```
+
+```
