@@ -1,9 +1,3 @@
-Berikut adalah file `README.md` yang telah diperbarui dengan penambahan emoji yang relevan di setiap bagian, judul, daftar, hingga langkah-langkah *setup*.
-
-Penambahan emoji ini dirancang untuk membuat **hierarki visual** menjadi lebih jelas, mempermudah pemindaian (*scanning*), dan membantu pembaca memahami alur serta struktur proyek secara lebih intuitif.
-
----
-
 ```markdown
 # 👨‍💻 Mubadev
 
