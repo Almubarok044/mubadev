@@ -39,8 +39,18 @@ class SkillsScreen extends StatelessWidget {
       ),
       _buildSkillBadge(
         context,
-        'Android Studio',
-        assetPath: 'assets/icon/androidstudio-original.svg',
+        'HTML5',
+        assetPath: 'assets/icon/html5-original.svg',
+      ),
+      _buildSkillBadge(
+        context,
+        'Tailwind CSS',
+        assetPath: 'assets/icon/tailwindcss-original.svg',
+      ),
+      _buildSkillBadge(
+        context,
+        'JavaScript',
+        assetPath: 'assets/icon/javascript-original.svg',
       ),
       _buildSkillBadge(
         context,
@@ -51,11 +61,6 @@ class SkillsScreen extends StatelessWidget {
         context,
         'Supabase',
         assetPath: 'assets/icon/supabase-original.svg',
-      ),
-      _buildSkillBadge(
-        context,
-        'Figma',
-        assetPath: 'assets/icon/figma-original.svg',
       ),
     ];
 
@@ -74,6 +79,16 @@ class SkillsScreen extends StatelessWidget {
         context,
         'VS Code',
         assetPath: 'assets/icon/vscode-original.svg',
+      ),
+      _buildSkillBadge(
+        context,
+        'Android Studio',
+        assetPath: 'assets/icon/androidstudio-original.svg',
+      ),
+      _buildSkillBadge(
+        context,
+        'Figma',
+        assetPath: 'assets/icon/figma-original.svg',
       ),
       _buildSkillBadge(
         context,
@@ -113,11 +128,13 @@ class SkillsScreen extends StatelessWidget {
 
     final isPortraitMobile = MediaQuery.of(context).size.width < 600;
 
-    final row1A = row1.sublist(0, 4);
-    final row1B = row1.sublist(4, 8);
+    final mid1 = (row1.length / 2).ceil();
+    final row1A = row1.sublist(0, mid1);
+    final row1B = row1.sublist(mid1);
 
-    final row2A = row2.sublist(0, 4);
-    final row2B = row2.sublist(4, 8);
+    final mid2 = (row2.length / 2).ceil();
+    final row2A = row2.sublist(0, mid2);
+    final row2B = row2.sublist(mid2);
 
     return PageLayout(
       activeMenu: 'Keahlian',

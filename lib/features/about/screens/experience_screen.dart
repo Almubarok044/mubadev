@@ -349,6 +349,7 @@ class _TimelineRailState extends State<TimelineRail>
 
   @override
   void dispose() {
+    _controller.stop();
     _controller.dispose();
     super.dispose();
   }

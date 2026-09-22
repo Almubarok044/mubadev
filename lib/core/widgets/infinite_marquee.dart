@@ -1,5 +1,5 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class InfiniteMarquee extends StatefulWidget {
   final List<Widget> items;
@@ -21,36 +21,54 @@ class InfiniteMarquee extends StatefulWidget {
   State<InfiniteMarquee> createState() => _InfiniteMarqueeState();
 }
 
-class _InfiniteMarqueeState extends State<InfiniteMarquee> {
-  late ScrollController _scrollController;
-  Timer? _timer;
+class _InfiniteMarqueeState extends State<InfiniteMarquee>
+    with SingleTickerProviderStateMixin {
+  late final ScrollController _scrollController;
+  Ticker? _ticker;
+  Duration _lastElapsed = Duration.zero;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    
+
+    _ticker = createTicker(_onTick);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _startScrolling();
-    });
-  }
-
-  void _startScrolling() {
-    const int fps = 60;
-    const int delayMs = 1000 ~/ fps;
-    final double step = widget.velocity / fps;
-
-    _timer = Timer.periodic(const Duration(milliseconds: delayMs), (timer) {
-      if (_scrollController.hasClients) {
-        double offset = _scrollController.offset + step;
-        _scrollController.jumpTo(offset);
+      if (mounted && _ticker != null && !_ticker!.isActive) {
+        _ticker!.start();
       }
     });
   }
 
+  void _onTick(Duration elapsed) {
+    if (!mounted || !_scrollController.hasClients) {
+      _lastElapsed = elapsed;
+      return;
+    }
+
+    final double deltaSeconds =
+        (elapsed - _lastElapsed).inMicroseconds / 1000000.0;
+    _lastElapsed = elapsed;
+
+    // Filter out huge initial frame hitch or paused tab
+    if (deltaSeconds <= 0 || deltaSeconds > 0.1) return;
+
+    if (_scrollController.position.hasContentDimensions) {
+      final double step = widget.velocity * deltaSeconds;
+      final double newOffset = _scrollController.offset + step;
+      try {
+        _scrollController.jumpTo(newOffset);
+      } catch (_) {
+        // Safe guard against view disposal during hot reload/restart
+      }
+    }
+  }
+
   @override
   void dispose() {
-    _timer?.cancel();
+    _ticker?.stop();
+    _ticker?.dispose();
+    _ticker = null;
     _scrollController.dispose();
     super.dispose();
   }
@@ -58,7 +76,7 @@ class _InfiniteMarqueeState extends State<InfiniteMarquee> {
   @override
   Widget build(BuildContext context) {
     if (widget.items.isEmpty) return SizedBox(height: widget.height);
-    
+
     return SizedBox(
       height: widget.height,
       child: ListView.builder(

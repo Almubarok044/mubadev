@@ -106,7 +106,12 @@ class _HoverPortfolioCardState extends State<HoverPortfolioCard> {
             duration: const Duration(milliseconds: 260),
             curve: Curves.easeOutCubic,
             transform: Matrix4.translationValues(0, _isHovered ? -4 : 0, 0)
-              ..scaleByDouble(_isHovered ? 1.01 : 1.0, 1.01, 1.01, 1.0),
+              ..scaleByDouble(
+                _isHovered ? 1.01 : 1.0,
+                _isHovered ? 1.01 : 1.0,
+                1.0,
+                1.0,
+              ),
             decoration: BoxDecoration(
               color: AppColors.surface(context),
               borderRadius: BorderRadius.circular(20),

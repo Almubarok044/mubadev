@@ -53,15 +53,16 @@ class MyApp extends StatelessWidget {
               brightness: Brightness.light,
             ),
             useMaterial3: true,
-            scaffoldBackgroundColor: AppColors.background(context),
+            scaffoldBackgroundColor: const Color(0xFFF4F9FF),
           ),
           darkTheme: ThemeData(
+            fontFamily: 'Inter',
             colorScheme: ColorScheme.fromSeed(
               seedColor: AppColors.primary,
               brightness: Brightness.dark,
             ),
             useMaterial3: true,
-            scaffoldBackgroundColor: AppColors.background(context),
+            scaffoldBackgroundColor: const Color(0xFF0B1120),
           ),
           initialRoute: '/',
           onGenerateRoute: (settings) {

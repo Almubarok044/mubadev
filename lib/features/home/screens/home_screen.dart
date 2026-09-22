@@ -152,11 +152,13 @@ class HomeScreen extends StatelessWidget {
                               'https://wa.me/$phoneNumber?text=${Uri.encodeComponent('Halo, saya tertarik dengan profil Anda.')}',
                             );
 
-                            if (await canLaunchUrl(uri)) {
+                            try {
                               await launchUrl(
                                 uri,
                                 mode: LaunchMode.externalApplication,
                               );
+                            } catch (e) {
+                              debugPrint('Could not launch WhatsApp: $e');
                             }
                           },
                           icon: const FaIcon(FontAwesomeIcons.whatsapp),

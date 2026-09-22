@@ -83,11 +83,14 @@ flutter:
     - assets/icon/firebase-original.svg
     - assets/icon/flutter-original.svg
     - assets/icon/git-original.svg
+    - assets/icon/html5-original.svg
     - assets/icon/iotgemini-original.svg
     - assets/icon/java-original.svg
+    - assets/icon/javascript-original.svg
     - assets/icon/kotlin-original.svg
     - assets/icon/linux-original.svg
     - assets/icon/supabase-original.svg
+    - assets/icon/tailwindcss-original.svg
     - assets/icon/ubuntu-original.svg
     - assets/icon/vscode-original.svg
     - assets/icon/windows11-original.svg

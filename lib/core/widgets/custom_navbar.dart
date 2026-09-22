@@ -168,11 +168,10 @@ class CustomNavbar extends StatelessWidget {
   }) {
     bool isActive = activeMenu == title;
 
+    bool isHovered = false;
     return CursorHideRegion(
       child: StatefulBuilder(
         builder: (context, setState) {
-          bool isHovered = false;
-
           return MouseRegion(
             onEnter: (_) => setState(() => isHovered = true),
             onExit: (_) => setState(() => isHovered = false),

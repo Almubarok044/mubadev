@@ -32,7 +32,13 @@ class ProjectDetailScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 CursorHideRegion(
                   child: InkWell(
-                    onTap: () => Navigator.pop(context),
+                    onTap: () {
+                      if (Navigator.canPop(context)) {
+                        Navigator.pop(context);
+                      } else {
+                        Navigator.pushReplacementNamed(context, '/work');
+                      }
+                    },
                     borderRadius: BorderRadius.circular(8),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(

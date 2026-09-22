@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import 'custom_navbar.dart';
@@ -33,113 +31,105 @@ class PageLayout extends StatelessWidget {
       body: Stack(
         children: [
           // ============================================================
-          // BACKGROUND GRADIENT
+          // BACKGROUND LAYER (ISOLATED IN REPAINT BOUNDARY)
           // ============================================================
           Positioned.fill(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: isDark
-                      ? const [
-                          Color(0xFF06131F),
-                          Color(0xFF0B1A2A),
-                          Color(0xFF10273A),
-                        ]
-                      : const [
-                          Color(0xFFEAF7FF),
-                          Color(0xFFF8FBFF),
-                          Color(0xFFE9F5F1),
+            child: RepaintBoundary(
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: isDark
+                              ? const [
+                                  Color(0xFF06131F),
+                                  Color(0xFF0B1A2A),
+                                  Color(0xFF10273A),
+                                ]
+                              : const [
+                                  Color(0xFFEAF7FF),
+                                  Color(0xFFF8FBFF),
+                                  Color(0xFFE9F5F1),
+                                ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // TOP DECORATION
+                  Positioned(
+                    top: -120,
+                    left: -80,
+                    child: Container(
+                      width: 420,
+                      height: 420,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: RadialGradient(
+                          colors: [
+                            AppColors.primary.withValues(
+                              alpha: isDark ? 0.28 : 0.18,
+                            ),
+                            Colors.transparent,
+                          ],
+                          radius: 1.2,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.primary.withValues(
+                              alpha: isDark ? 0.25 : 0.16,
+                            ),
+                            blurRadius: 90,
+                            spreadRadius: 18,
+                          ),
                         ],
-                ),
-              ),
-            ),
-          ),
-
-          // ============================================================
-          // TOP DECORATION
-          // ============================================================
-          Positioned(
-            top: -120,
-            left: -80,
-            child: AnimatedContainer(
-              duration: const Duration(seconds: 18),
-              curve: Curves.easeInOutCubic,
-              width: 420,
-              height: 420,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: RadialGradient(
-                  colors: [
-                    AppColors.primary.withValues(alpha: isDark ? 0.28 : 0.18),
-                    Colors.transparent,
-                  ],
-                  radius: 1.2,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.primary.withValues(
-                      alpha: isDark ? 0.25 : 0.16,
+                      ),
                     ),
-                    blurRadius: 90,
-                    spreadRadius: 18,
+                  ),
+
+                  // BOTTOM DECORATION
+                  Positioned(
+                    right: -110,
+                    bottom: -90,
+                    child: Container(
+                      width: 420,
+                      height: 420,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: RadialGradient(
+                          colors: [
+                            AppColors.primary.withValues(
+                              alpha: isDark ? 0.22 : 0.14,
+                            ),
+                            Colors.transparent,
+                          ],
+                          radius: 1.3,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppColors.primary.withValues(
+                              alpha: isDark ? 0.2 : 0.12,
+                            ),
+                            blurRadius: 80,
+                            spreadRadius: 14,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // GRID
+                  Positioned.fill(
+                    child: CustomPaint(
+                      painter: GridPainter(gridColor: gridColor),
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
-
-          // ============================================================
-          // BOTTOM DECORATION
-          // ============================================================
-          Positioned(
-            right: -110,
-            bottom: -90,
-            child: AnimatedContainer(
-              duration: const Duration(seconds: 20),
-              curve: Curves.easeInOutCubic,
-              width: 420,
-              height: 420,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: RadialGradient(
-                  colors: [
-                    AppColors.primary.withValues(alpha: isDark ? 0.22 : 0.14),
-                    Colors.transparent,
-                  ],
-                  radius: 1.3,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.primary.withValues(
-                      alpha: isDark ? 0.2 : 0.12,
-                    ),
-                    blurRadius: 80,
-                    spreadRadius: 14,
-                  ),
-                ],
-              ),
-            ),
-          ),
-
-          // ============================================================
-          // BACKDROP BLUR
-          // ============================================================
-          Positioned.fill(
-            child: ClipRect(
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 1.2, sigmaY: 1.2),
-                child: Container(color: Colors.transparent),
-              ),
-            ),
-          ),
-
-          // ============================================================
-          // GRID
-          // ============================================================
-          Positioned.fill(
-            child: CustomPaint(painter: GridPainter(gridColor: gridColor)),
           ),
 
           // ============================================================
